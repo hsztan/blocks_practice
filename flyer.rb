@@ -17,4 +17,6 @@ flyers = []
   flyers << Flyer.new("Flyer #{n}", "flyer#{n}.example.com", n * 1000)
 end
 
-puts flyers
+total_miles =  flyers.reduce(0) {|sum, flyer| sum += flyer.miles_flown}
+
+puts "Total miles flown: #{total_miles}"
