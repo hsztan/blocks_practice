@@ -1,3 +1,5 @@
+require_relative "my_enumerable"
+
 class Song
   attr_reader :name, :artist, :duration
 
@@ -13,7 +15,8 @@ class Song
 end
 
 class Playlist
-  include Enumerable
+  # include Enumerable
+  include MyEnumerable
 
   def initialize(name)
     @name = name
@@ -33,7 +36,7 @@ class Playlist
   end
 
   def each_by_artist(artist)
-    select { |song| song.artist == artist }.each { |song| yield song }
+    my_select { |song| song.artist == artist }.each { |song| yield song }
   end
 end
 
@@ -53,7 +56,7 @@ playlist.add_song(song_5)
 # playlist.play_songs
 # zepellin_songs = playlist.select { |song| song.artist == "Led Zeppelin" }
 # p zepellin_songs
-# playlist.each_by_artist("Led Zeppelin") { |song| song.play }
+playlist.each_by_artist("Led Zeppelin") { |song| song.play }
 
-dir = Dir.new("/Users/hnawrocki")
-dir.each { |entry| puts entry }
+# dir = Dir.new("/Users/hnawrocki")
+# dir.each { |entry| puts entry }
